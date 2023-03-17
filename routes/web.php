@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect('login');
 });
+
+Route::get('/dashboard', [App\Http\Controllers\Auth\LoginController::class, 'dashboard'])->name('dashboard');
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('loginuser');
+
+Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
