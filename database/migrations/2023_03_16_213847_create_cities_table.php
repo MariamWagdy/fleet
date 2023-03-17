@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sort');
+            $table->string('city_name_ar');
             $table->string('city_name');
-            $table->timestamps();
         });
     }
 
