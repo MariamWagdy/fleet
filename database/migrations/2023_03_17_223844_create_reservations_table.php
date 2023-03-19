@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('seats', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('seat_number');
-            $table->boolean('is_reserved');
-            $table->unsignedInteger('bus_id');
+        Schema::create('reservations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('trip_id');
+            $table->foreignId('seat_id');
+            $table->boolean('is_cancelled');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('seats');
+        Schema::dropIfExists('reservations');
     }
 };

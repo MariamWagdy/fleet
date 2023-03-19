@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Reservations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('profile', array('before' => 'csrf', function()
+{
+}));
+Route::get('reservations', 'ArticleController@index');
+//Route::get('reservations/{id}', 'ArticleController@show');
+Route::post('reservations', 'ArticleController@store');
+//Route::put('reservations/{id}', 'ArticleController@update');

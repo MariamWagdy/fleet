@@ -11,12 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('trips');
+
         Schema::create('trips', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->string('trip_number')->unique();
             $table->foreignId('source_city_id');
             $table->foreignId('destination_city_id');
             $table->foreignId('bus_id');
+            $table->dateTime('departure_time');
+            $table->dateTime('arrival_time');
+            $table->boolean('is_available')->default(1);
             $table->timestamps();
+        });
+
+        Schema::table('trips', function (Blueprint $table)
+        {
+            $table->foreign('parent_id')->references('id')
+                ->on('trips')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
